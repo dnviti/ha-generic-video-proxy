@@ -1,0 +1,98 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Generic Video Proxy",
+        "description": "Home Assistant fetches this stream and re-serves it from its own address, so the video plays in the web UI over http or https, at home and from outside.",
+        "data": {
+          "name": "Name",
+          "url": "Stream URL",
+          "source_type": "Source type",
+          "auth_type": "Authentication",
+          "username": "Username",
+          "password": "Password",
+          "verify_ssl": "Verify TLS certificate",
+          "snapshot_url": "Snapshot URL",
+          "poster_url": "Poster image URL",
+          "headers": "Extra request headers",
+          "scan_interval": "Snapshot interval",
+          "reconnect_interval": "Reconnect interval",
+          "upstream_timeout": "Connect timeout",
+          "stall_timeout": "Stall timeout",
+          "frame_buffer": "Frame buffer",
+          "validate": "Test the connection before saving"
+        },
+        "data_description": {
+          "url": "Example: http://192.168.1.10:8080/video for an MJPEG stream, https://example.com/live/index.m3u8 for HLS, or a direct image URL.",
+          "source_type": "Detect automatically identifies the stream from the upstream Content-Type when you save.",
+          "auth_type": "HTTP authentication used by the upstream device, if any.",
+          "verify_ssl": "Disable only for devices with a self-signed certificate.",
+          "snapshot_url": "Optional JPEG endpoint used for the camera image. Needed for HLS or MP4 sources that have no still image.",
+          "poster_url": "Optional image shown before the video starts.",
+          "headers": "One header per line, for example: X-Api-Key: my-token",
+          "scan_interval": "How often a still image source is polled, in seconds.",
+          "reconnect_interval": "Delay before reconnecting after a failure, in seconds.",
+          "upstream_timeout": "Timeout for connecting to the source, in seconds.",
+          "stall_timeout": "Close the connection when no data arrives for this many seconds.",
+          "frame_buffer": "How many frames are buffered per viewer."
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Could not read the stream. Check the URL, the credentials and that the source is reachable from Home Assistant.",
+      "invalid_config": "The configuration is not valid. Check the URL and the advanced values; see the Home Assistant log for details."
+    },
+    "abort": {
+      "already_configured": "This stream is already configured."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Generic Video Proxy",
+        "description": "Update the source, credentials and tuning of this proxy.",
+        "data": {
+          "name": "Name",
+          "url": "Stream URL",
+          "source_type": "Source type",
+          "auth_type": "Authentication",
+          "username": "Username",
+          "password": "Password",
+          "verify_ssl": "Verify TLS certificate",
+          "snapshot_url": "Snapshot URL",
+          "poster_url": "Poster image URL",
+          "headers": "Extra request headers",
+          "scan_interval": "Snapshot interval",
+          "reconnect_interval": "Reconnect interval",
+          "upstream_timeout": "Connect timeout",
+          "stall_timeout": "Stall timeout",
+          "frame_buffer": "Frame buffer",
+          "validate": "Test the connection before saving"
+        },
+        "data_description": {
+          "password": "Leave empty to keep the stored password.",
+          "headers": "One header per line, for example: X-Api-Key: my-token"
+        }
+      }
+    }
+  },
+  "selector": {
+    "source_type": {
+      "options": {
+        "auto": "Detect automatically",
+        "mjpeg": "MJPEG (multipart image stream)",
+        "hls": "HLS (m3u8 playlist)",
+        "progressive": "Progressive video (MP4/WebM)",
+        "image": "Still image (polled snapshot)",
+        "rtsp": "RTSP (handled by Home Assistant)"
+      }
+    },
+    "auth_type": {
+      "options": {
+        "none": "None",
+        "basic": "Basic",
+        "digest": "Digest"
+      }
+    }
+  }
+}

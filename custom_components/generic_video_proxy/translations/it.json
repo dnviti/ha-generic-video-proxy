@@ -1,0 +1,98 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Generic Video Proxy",
+        "description": "Home Assistant scarica questo flusso e lo ripubblica dal proprio indirizzo: il video si vede nella web UI in http o https, in casa e da fuori.",
+        "data": {
+          "name": "Nome",
+          "url": "URL del flusso",
+          "source_type": "Tipo di sorgente",
+          "auth_type": "Autenticazione",
+          "username": "Nome utente",
+          "password": "Password",
+          "verify_ssl": "Verifica il certificato TLS",
+          "snapshot_url": "URL dello snapshot",
+          "poster_url": "URL immagine di copertina",
+          "headers": "Intestazioni HTTP aggiuntive",
+          "scan_interval": "Intervallo snapshot",
+          "reconnect_interval": "Intervallo di riconnessione",
+          "upstream_timeout": "Timeout di connessione",
+          "stall_timeout": "Timeout di stallo",
+          "frame_buffer": "Buffer dei fotogrammi",
+          "validate": "Verifica la connessione prima di salvare"
+        },
+        "data_description": {
+          "url": "Esempio: http://192.168.1.10:8080/video per un flusso MJPEG, https://example.com/live/index.m3u8 per HLS, oppure l'URL diretto di un'immagine.",
+          "source_type": "Rilevamento automatico identifica il flusso dal Content-Type della sorgente al momento del salvataggio.",
+          "auth_type": "Autenticazione HTTP usata dal dispositivo, se necessaria.",
+          "verify_ssl": "Disattivala solo per dispositivi con certificato self-signed.",
+          "snapshot_url": "Endpoint JPEG opzionale usato per l'immagine della telecamera. Necessario per sorgenti HLS o MP4 senza immagine statica.",
+          "poster_url": "Immagine opzionale mostrata prima dell'avvio del video.",
+          "headers": "Una intestazione per riga, ad esempio: X-Api-Key: mio-token",
+          "scan_interval": "Ogni quanto viene interrogata una sorgente a immagine singola, in secondi.",
+          "reconnect_interval": "Attesa prima di riconnettersi dopo un errore, in secondi.",
+          "upstream_timeout": "Timeout di connessione alla sorgente, in secondi.",
+          "stall_timeout": "Chiude la connessione se non arrivano dati per questo numero di secondi.",
+          "frame_buffer": "Quanti fotogrammi vengono bufferizzati per ogni spettatore."
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Impossibile leggere il flusso. Controlla l'URL, le credenziali e che la sorgente sia raggiungibile da Home Assistant.",
+      "invalid_config": "La configurazione non è valida. Controlla l'URL e i valori avanzati; vedi il log di Home Assistant per i dettagli."
+    },
+    "abort": {
+      "already_configured": "Questo flusso è già configurato."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Generic Video Proxy",
+        "description": "Aggiorna sorgente, credenziali e parametri di questo proxy.",
+        "data": {
+          "name": "Nome",
+          "url": "URL del flusso",
+          "source_type": "Tipo di sorgente",
+          "auth_type": "Autenticazione",
+          "username": "Nome utente",
+          "password": "Password",
+          "verify_ssl": "Verifica il certificato TLS",
+          "snapshot_url": "URL dello snapshot",
+          "poster_url": "URL immagine di copertina",
+          "headers": "Intestazioni HTTP aggiuntive",
+          "scan_interval": "Intervallo snapshot",
+          "reconnect_interval": "Intervallo di riconnessione",
+          "upstream_timeout": "Timeout di connessione",
+          "stall_timeout": "Timeout di stallo",
+          "frame_buffer": "Buffer dei fotogrammi",
+          "validate": "Verifica la connessione prima di salvare"
+        },
+        "data_description": {
+          "password": "Lascia vuoto per mantenere la password salvata.",
+          "headers": "Una intestazione per riga, ad esempio: X-Api-Key: mio-token"
+        }
+      }
+    }
+  },
+  "selector": {
+    "source_type": {
+      "options": {
+        "auto": "Rilevamento automatico",
+        "mjpeg": "MJPEG (flusso di immagini multipart)",
+        "hls": "HLS (playlist m3u8)",
+        "progressive": "Video progressivo (MP4/WebM)",
+        "image": "Immagine statica (snapshot a intervalli)",
+        "rtsp": "RTSP (gestito da Home Assistant)"
+      }
+    },
+    "auth_type": {
+      "options": {
+        "none": "Nessuna",
+        "basic": "Basic",
+        "digest": "Digest"
+      }
+    }
+  }
+}

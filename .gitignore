@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.venv*/
+venv/
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# Node / card test dependencies (the lockfile is committed on purpose)
+node_modules/
+
+# Home Assistant dev config
+config/
+.storage/
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Local research scratch (never published)
+.research/
+
+# Agent tooling
+.mnemon/

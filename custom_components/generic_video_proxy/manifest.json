@@ -1,0 +1,13 @@
+{
+  "domain": "generic_video_proxy",
+  "name": "Generic Video Proxy",
+  "after_dependencies": ["frontend"],
+  "codeowners": ["@daniele"],
+  "config_flow": true,
+  "dependencies": ["http", "websocket_api"],
+  "documentation": "https://github.com/daniele/ha-generic-video-proxy",
+  "integration_type": "device",
+  "iot_class": "local_push",
+  "issue_tracker": "https://github.com/daniele/ha-generic-video-proxy/issues",
+  "version": "0.1.0"
+}

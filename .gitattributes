@@ -1,0 +1,8 @@
+# Normalise line endings: the repository stores LF, whatever the platform.
+* text=auto eol=lf
+
+*.png binary
+
+# Vendored, minified third party player; see THIRD_PARTY_LICENSES.md
+custom_components/generic_video_proxy/www/hls.light.min.js linguist-vendored -diff
+package-lock.json linguist-generated

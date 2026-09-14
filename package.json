@@ -1,0 +1,14 @@
+{
+  "name": "ha-generic-video-proxy-card-tests",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Automated jsdom tests for the Generic Video Proxy Lovelace card.",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "test": "node --test \"tests/js/**/*.test.mjs\""
+  },
+  "devDependencies": {
+    "jsdom": "^30.0.1"
+  }
+}
