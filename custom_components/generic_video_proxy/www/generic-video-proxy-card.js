@@ -21,7 +21,7 @@
 const CARD_VERSION = "0.1.0";
 const CARD_TAG = "generic-video-proxy-card";
 const EDITOR_TAG = "generic-video-proxy-card-editor";
-const PROJECT_URL = "https://github.com/daniele/ha-generic-video-proxy";
+const PROJECT_URL = "https://github.com/dnviti/ha-generic-video-proxy";
 
 const WS_STREAM_URL = "generic_video_proxy/stream_url";
 const WS_LIST = "generic_video_proxy/list";

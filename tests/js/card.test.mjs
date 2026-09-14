@@ -200,7 +200,7 @@ describe("Generic Video Proxy card", () => {
       name: "Generic Video Proxy",
       description: "Play a video or image stream proxied through Home Assistant.",
       preview: false,
-      documentationURL: "https://github.com/daniele/ha-generic-video-proxy",
+      documentationURL: "https://github.com/dnviti/ha-generic-video-proxy",
     });
   });
 

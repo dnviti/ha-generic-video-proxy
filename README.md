@@ -1,8 +1,8 @@
 # Generic Video Proxy
 
 [![HACS Custom](https://img.shields.io/badge/HACS-Custom-41BDF5.svg)](https://github.com/hacs/integration)
-[![Validate](https://github.com/daniele/ha-generic-video-proxy/actions/workflows/validate.yml/badge.svg)](https://github.com/daniele/ha-generic-video-proxy/actions/workflows/validate.yml)
-[![Tests](https://github.com/daniele/ha-generic-video-proxy/actions/workflows/tests.yml/badge.svg)](https://github.com/daniele/ha-generic-video-proxy/actions/workflows/tests.yml)
+[![Validate](https://github.com/dnviti/ha-generic-video-proxy/actions/workflows/validate.yml/badge.svg)](https://github.com/dnviti/ha-generic-video-proxy/actions/workflows/validate.yml)
+[![Tests](https://github.com/dnviti/ha-generic-video-proxy/actions/workflows/tests.yml/badge.svg)](https://github.com/dnviti/ha-generic-video-proxy/actions/workflows/tests.yml)
 
 A Home Assistant integration that proxies **any** HTTP(S) video or image stream
 through Home Assistant's own web server, and ships with its own Lovelace card to
@@ -80,7 +80,7 @@ same origin and scheme the dashboard was served from.
 ### HACS (recommended)
 
 1. Open HACS → **Integrations** → the three dot menu → **Custom repositories**.
-2. Add `https://github.com/daniele/ha-generic-video-proxy` with category
+2. Add `https://github.com/dnviti/ha-generic-video-proxy` with category
    **Integration**.
 3. Search for **Generic Video Proxy** in HACS and install it.
 4. Restart Home Assistant.
@@ -275,23 +275,17 @@ verified rather than mocked. `hassfest` and the HACS validation run in CI
 
 ## Publishing this repository to HACS
 
-This repository already follows the HACS requirements: one integration under
-`custom_components/`, a `manifest.json` with all required keys, local brand
-images under `custom_components/generic_video_proxy/brand/`, an `hacs.json`, a
-README, tests, and workflows running hassfest and the HACS action. Before
-publishing, replace the placeholder owner in these places:
+The repository already follows the HACS requirements: one integration under
+`custom_components/`, a `manifest.json` with all required keys and the owner set
+to `@dnviti`, local brand images under
+`custom_components/generic_video_proxy/brand/`, an `hacs.json`, a README, tests,
+and workflows running hassfest and the HACS action.
 
-- `custom_components/generic_video_proxy/manifest.json`: `codeowners`,
-  `documentation`, `issue_tracker`;
-- `custom_components/generic_video_proxy/www/generic-video-proxy-card.js`: the
-  `documentationURL` of the card;
-- `README.md` and `CHANGELOG.md`: repository links and badges.
-
-Then add a repository description and the topics `home-assistant`, `hacs`,
-`integration`, `mjpeg`, `hls` on GitHub, create a release whose tag matches the
-`version` in `manifest.json` (`v0.1.0`), and optionally open a pull request
-against [hacs/default](https://github.com/hacs/default) to be included in the
-HACS store.
+To be listed in the HACS store (rather than added as a custom repository), add a
+repository description and the topics `home-assistant`, `hacs`, `integration`,
+`mjpeg`, `hls` on GitHub, publish a release whose tag matches the `version` in
+`manifest.json` (`v0.1.0`), and open a pull request against
+[hacs/default](https://github.com/hacs/default) once both workflows are green.
 
 ## License
 

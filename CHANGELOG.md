@@ -40,4 +40,4 @@ Initial release.
   Assistant's own aiohttp server and a real upstream HTTP server) and 11
   browser-side card tests.
 
-[0.1.0]: https://github.com/daniele/ha-generic-video-proxy/releases/tag/v0.1.0
+[0.1.0]: https://github.com/dnviti/ha-generic-video-proxy/releases/tag/v0.1.0
