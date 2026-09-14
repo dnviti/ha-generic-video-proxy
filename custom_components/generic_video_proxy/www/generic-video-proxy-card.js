@@ -18,7 +18,7 @@
  * Licensed under the MIT license, like the rest of the integration.
  */
 
-const CARD_VERSION = "0.1.0";
+const CARD_VERSION = "0.1.1";
 const CARD_TAG = "generic-video-proxy-card";
 const EDITOR_TAG = "generic-video-proxy-card-editor";
 const PROJECT_URL = "https://github.com/dnviti/ha-generic-video-proxy";

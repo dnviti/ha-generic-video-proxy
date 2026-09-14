@@ -4,6 +4,17 @@ All notable changes to this project are documented in this file.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and
 this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.1] - 2026-09-14
+
+### Fixed
+
+- Removed the `hacs` minimum-version key from `hacs.json`. HACS refuses to
+  install a repository whose manifest demands a newer HACS than the one running
+  (`This version requires HACS 2.0.0 or newer.`), and this integration needs no
+  HACS 2.x feature to be installed - HACS only copies the files. The only
+  remaining requirement is Home Assistant 2025.1.0, which the code genuinely
+  targets.
+
 ## [0.1.0] - 2026-09-14
 
 Initial release.
@@ -40,4 +51,5 @@ Initial release.
   Assistant's own aiohttp server and a real upstream HTTP server) and 11
   browser-side card tests.
 
+[0.1.1]: https://github.com/dnviti/ha-generic-video-proxy/releases/tag/v0.1.1
 [0.1.0]: https://github.com/dnviti/ha-generic-video-proxy/releases/tag/v0.1.0
