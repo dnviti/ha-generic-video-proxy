@@ -1,6 +1,9 @@
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-pythonpath = ["tests"]
+# "tests" makes the helper module importable; "." makes custom_components
+# importable when pytest is run as a console script (python -m pytest adds the
+# current directory to sys.path by itself, the console script does not).
+pythonpath = ["tests", "."]
 asyncio_mode = "auto"
 # tests/conftest.py re-enables sockets (the Home Assistant plugin blocks them);
 # this suite talks to a real upstream HTTP server on 127.0.0.1.

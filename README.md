@@ -248,7 +248,8 @@ logger:
 
 ## Development
 
-Prerequisites: Python 3.12 and Node.js for the card tests.
+Prerequisites: Python 3.12 for the integration tests and Node.js 24 or newer for
+the browser-side card tests (jsdom requires it).
 
 ```shell
 # Python tests and lint
