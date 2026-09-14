@@ -127,6 +127,14 @@ class TestStreaming:
 
         assert len(frames) == 2
 
+    async def test_lenient_boundary_like_the_reference_camera(self, hubs: HubFactory) -> None:
+        # The reference camera declares "boundary=--foo" and writes "--foo".
+        hub = hubs("/mjpeg?frames=4&boundary=--foo&body_boundary=--foo")
+
+        frames = await take_frames(hub, 2)
+
+        assert len(frames) == 2
+
     async def test_fps_is_reported(self, hubs: HubFactory) -> None:
         hub = hubs("/mjpeg-endless")
 

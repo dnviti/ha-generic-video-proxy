@@ -54,6 +54,28 @@ class TestMultipartFrameParser:
         assert parser.feed(stream) == [FRAME_A, FRAME_B]
         assert parser.frames_parsed == 2
 
+    def test_body_delimiter_without_the_extra_prefix(self) -> None:
+        # The reference device for this integration declares "boundary=--foo" in
+        # the header and then writes "--foo" in the body, which browsers accept.
+        parser = MultipartFrameParser("--foo")
+        stream = (
+            b"--foo\r\nContent-Type: image/jpeg\r\nContent-Length: "
+            + str(len(FRAME_A)).encode()
+            + b"\r\n\r\n"
+            + FRAME_A
+            + b"\r\n--foo\r\nContent-Type: image/jpeg\r\nContent-Length: "
+            + str(len(FRAME_B)).encode()
+            + b"\r\n\r\n"
+            + FRAME_B
+            + b"\r\n"
+        )
+        assert parser.feed(stream) == [FRAME_A, FRAME_B]
+
+    def test_body_delimiter_without_the_extra_prefix_and_without_length(self) -> None:
+        parser = MultipartFrameParser("--foo")
+        stream = b"--foo\r\nContent-Type: image/jpeg\r\n\r\n" + FRAME_A + b"\r\n--foo--\r\n"
+        assert parser.feed(stream) == [FRAME_A]
+
     def test_split_across_chunks(self) -> None:
         parser = MultipartFrameParser("frame")
         stream = part(b"frame", FRAME_A) + part(b"frame", FRAME_B)

@@ -81,7 +81,9 @@ class MultipartFrameParser:
         if not boundary:
             raise ValueError("boundary must not be empty")
         self.boundary = boundary
-        self.delimiter = b"--" + boundary.encode("latin-1")
+        self.delimiters = _build_delimiters(boundary)
+        self.delimiter = self.delimiters[0]
+        self._delimiter_keep = max(len(item) for item in self.delimiters)
         self.max_part_bytes = max_part_bytes
         self.require_jpeg = require_jpeg
         self._buffer = bytearray()
@@ -104,11 +106,12 @@ class MultipartFrameParser:
 
         while True:
             if self._state == "preamble":
-                index = self._buffer.find(self.delimiter)
-                if index < 0:
+                found = self._find_delimiter()
+                if found is None:
                     self._trim_preamble()
                     break
-                del self._buffer[: index + len(self.delimiter)]
+                index, delimiter = found
+                del self._buffer[: index + len(delimiter)]
                 self._state = "headers"
                 continue
 
@@ -147,16 +150,17 @@ class MultipartFrameParser:
                 continue
 
             if self._state == "body_until_boundary":
-                index = self._buffer.find(self.delimiter, self._body_scan_from)
-                if index < 0:
+                found = self._find_delimiter(self._body_scan_from)
+                if found is None:
                     if len(self._buffer) > self.max_part_bytes:
                         raise MultipartError("multipart part exceeded the maximum part size")
                     # A delimiter may still be split across two chunks, so the
                     # search restarts early enough to catch that overlap.
-                    self._body_scan_from = max(0, len(self._buffer) - len(self.delimiter) + 1)
+                    self._body_scan_from = max(0, len(self._buffer) - self._delimiter_keep + 1)
                     break
+                index, delimiter = found
                 data = bytes(self._buffer[:index])
-                del self._buffer[: index + len(self.delimiter)]
+                del self._buffer[: index + len(delimiter)]
                 self._body_scan_from = 0
                 self._emit(_rstrip_eol(data), frames)
                 self._state = "headers"
@@ -198,11 +202,37 @@ class MultipartFrameParser:
             return None
         return min(candidates)
 
+    def _find_delimiter(self, start: int = 0) -> tuple[int, bytes] | None:
+        """Return the earliest delimiter occurrence and the delimiter found."""
+        best: tuple[int, bytes] | None = None
+        for delimiter in self.delimiters:
+            index = self._buffer.find(delimiter, start)
+            if index >= 0 and (best is None or index < best[0]):
+                best = (index, delimiter)
+        return best
+
     def _trim_preamble(self) -> None:
         # Retain only as much as could still become a delimiter.
-        keep = len(self.delimiter) + 8
+        keep = self._delimiter_keep + 8
         if len(self._buffer) > keep:
             del self._buffer[: len(self._buffer) - keep]
+
+
+def _build_delimiters(boundary: str) -> tuple[bytes, ...]:
+    """Return the body delimiters to accept for a declared boundary.
+
+    RFC 2046 says the wire delimiter is ``--`` followed by the boundary from the
+    ``Content-Type`` header, so ``boundary=frame`` produces ``--frame`` and
+    ``boundary=--foo`` produces ``----foo``. Real cameras are sloppier than the
+    RFC: a device that advertises ``boundary=--foo`` often writes ``--foo`` in
+    the body, which is what the reference hardware for this integration does.
+    Browsers accept either form, so the parser does too.
+    """
+    encoded = boundary.encode("latin-1")
+    delimiters = [b"--" + encoded]
+    if encoded.startswith(b"--"):
+        delimiters.append(encoded)
+    return tuple(delimiters)
 
 
 def _rstrip_eol(data: bytes) -> bytes:

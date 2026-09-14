@@ -16,6 +16,9 @@ Initial release.
 - Source types: MJPEG (`multipart/x-mixed-replace`), HLS (`m3u8`), progressive
   video (MP4/WebM), polled still images and RTSP (handed to Home Assistant's own
   stream component). `auto` detects the type from the upstream response.
+- MJPEG parsing accepts both delimiter forms real cameras produce when the
+  advertised boundary already carries the leading dashes (`boundary=--foo` is
+  written as either `----foo` or `--foo`), verified against real hardware.
 - A shared upstream connection per proxy: one connection is opened when the
   first viewer arrives, fanned out to every viewer, and closed again after the
   last viewer leaves. Reconnects use exponential backoff.
