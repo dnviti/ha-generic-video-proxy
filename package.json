@@ -6,7 +6,7 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "test": "node --test \"tests/js/**/*.test.mjs\""
+    "test": "node --test tests/js/card.test.mjs"
   },
   "devDependencies": {
     "jsdom": "^30.0.1"

@@ -1,8 +1,9 @@
 # Test dependencies for ha-generic-video-proxy.
 #
 # pytest-homeassistant-custom-component pins the Home Assistant version the
-# suite runs against; 0.13.316 corresponds to Home Assistant 2025.1.4 on
-# Python 3.12.
-pytest-homeassistant-custom-component==0.13.316
+# suite runs against: 0.13.205 is the last release that supports Python 3.12 and
+# it brings Home Assistant 2025.1.4, the minimum version declared in hacs.json.
+# Newer releases of the plugin require Python 3.13 or 3.14.
+pytest-homeassistant-custom-component==0.13.205
 pytest==8.3.4
 ruff==0.16.7

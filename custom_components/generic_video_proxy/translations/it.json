@@ -23,7 +23,7 @@
           "validate": "Verifica la connessione prima di salvare"
         },
         "data_description": {
-          "url": "Esempio: http://192.168.1.10:8080/video per un flusso MJPEG, https://example.com/live/index.m3u8 per HLS, oppure l'URL diretto di un'immagine.",
+          "url": "L'indirizzo completo del flusso: un endpoint MJPEG, una playlist HLS, un file video o un'immagine statica, come esposti dal dispositivo in rete.",
           "source_type": "Rilevamento automatico identifica il flusso dal Content-Type della sorgente al momento del salvataggio.",
           "auth_type": "Autenticazione HTTP usata dal dispositivo, se necessaria.",
           "verify_ssl": "Disattivala solo per dispositivi con certificato self-signed.",

@@ -23,7 +23,7 @@
           "validate": "Test the connection before saving"
         },
         "data_description": {
-          "url": "Example: http://192.168.1.10:8080/video for an MJPEG stream, https://example.com/live/index.m3u8 for HLS, or a direct image URL.",
+          "url": "The full address of the stream: an MJPEG endpoint, an HLS playlist, a video file or a still image, as exposed by the device on your network.",
           "source_type": "Detect automatically identifies the stream from the upstream Content-Type when you save.",
           "auth_type": "HTTP authentication used by the upstream device, if any.",
           "verify_ssl": "Disable only for devices with a self-signed certificate.",
