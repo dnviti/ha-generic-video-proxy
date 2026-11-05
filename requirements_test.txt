@@ -5,5 +5,5 @@
 # it brings Home Assistant 2025.1.4, the minimum version declared in hacs.json.
 # Newer releases of the plugin require Python 3.13 or 3.14.
 pytest-homeassistant-custom-component==0.13.205
-pytest==8.3.4
+pytest==9.0.3
 ruff==0.16.7
